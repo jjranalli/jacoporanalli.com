@@ -1,7 +1,7 @@
 h1 {
-  @apply text-4xl pb-3 font-medium;
+  @apply text-3xl pb-3 font-semibold;
   @screen md {
-    @apply text-6xl;
+    @apply text-5xl;
   }
 }
 
@@ -19,10 +19,19 @@ h3 {
   }
 }
 
+p {
+  @apply leading-relaxed;
+}
+
 a {
-  @apply transition-colors duration-150;
+  @apply font-medium hover:text-blue-600;
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline solid theme("colors.blue.600") 2px;
+  text-underline-offset: 1px;
+  &.secondary {
+    @apply hover:text-yellow-400;
+    text-decoration: underline solid theme("colors.yellow.400") 2px;
+  }
 }
 
 * {
@@ -31,14 +40,21 @@ a {
 
 .description {
   p {
-    margin-block-end: 0.5rem;
+    margin-block-end: 0.75rem;
   }
-  h2 {
+  h1 {
+    @apply text-2xl pb-2 font-medium;
     @screen md {
       @apply text-3xl;
     }
   }
+}
+
+.dark {
   a {
-    @apply underline font-medium;
+    text-decoration: underline solid theme("colors.yellow.300") 2px;
+    &.secondary {
+      text-decoration: underline solid theme("colors.blue.500") 2px;
+    }
   }
 }

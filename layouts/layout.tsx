@@ -46,7 +46,7 @@ export default function Layout({ children }) {
         <meta name="twitter:image" content={twitterImgUrl} />
         <meta name="twitter:card" content="summary_large_image" />
 
-        {/* <link
+        <link
           rel="apple-touch-icon"
           sizes="180x180"
           href="/favicon/apple-touch-icon.png"
@@ -63,11 +63,13 @@ export default function Layout({ children }) {
           sizes="16x16"
           href="/favicon/favicon-16x16.png"
         />
-        <link rel="manifest" href="/favicon/site.webmanifest" /> */}
+        <link rel="manifest" href="/favicon/site.webmanifest" />
       </Head>
       <div className="relative min-h-screen flex flex-col justify-between">
-        <Navbar />
-        {children}
+        <div>
+          <Navbar />
+          {children}
+        </div>
         <Footer />
       </div>
     </>

@@ -5,7 +5,7 @@ export default function Container({ size, children }) {
     <div
       className={`${
         size != undefined ? size : "max-w-screen-xl"
-      } mx-auto px-2 sm:px-8`}
+      } mx-auto px-4 sm:px-8`}
     >
       {children}
     </div>

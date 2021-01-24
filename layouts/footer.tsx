@@ -1,19 +1,31 @@
-import Link from "next/link"
+import { Mail, Twitter, Github } from "../components/social"
 import Container from "./container"
 
 export default function Footer() {
   return (
-    <footer className="py-6 text-center">
+    <footer className="py-3.5">
       <Container>
-        <p>
-          Made with 🌘 by{" "}
-          <a
-            href="https://twitter.com/jj_ranalli"
-            className="text-indigo-700 hover:text-teal-600 dark:hover:text-yellow-200 font-medium duration-200"
-          >
-            Jacopo
+        <div className="flex space-x-8 justify-center">
+          <a className="w-6" href="mailto:jj@jacoporanalli.com">
+            <Mail />
           </a>
-        </p>
+          <a
+            className="w-6"
+            rel="noopener"
+            target="_blank"
+            href="https://twitter.com/jj_ranalli"
+          >
+            <Twitter />
+          </a>
+          <a
+            className="w-6"
+            rel="noopener"
+            target="_blank"
+            href="https://github.com/jjranalli"
+          >
+            <Github />
+          </a>
+        </div>
       </Container>
     </footer>
   )
