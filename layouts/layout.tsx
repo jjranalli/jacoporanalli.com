@@ -1,4 +1,5 @@
 import Head from "next/head"
+import { useEffect } from "react"
 
 import Navbar from "./navbar"
 import Footer from "./footer"
@@ -55,7 +56,7 @@ export default function Layout({ children }) {
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </Head>
-      <div className="layout">
+      <div id="layout">
         <div>
           <Navbar />
           {children}
