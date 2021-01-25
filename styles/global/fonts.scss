@@ -45,11 +45,14 @@ a {
   }
 
   a {
-    text-decoration: underline solid theme("colors.blue.600") 2px;
-    text-underline-offset: 0.5px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: theme("colors.blue.600");
+    text-decoration-thickness: 2px;
+    text-underline-offset: 1px;
     &.secondary {
       @apply hover:text-yellow-400;
-      text-decoration: underline solid theme("colors.yellow.400") 2px;
+      text-decoration-color: theme("colors.yellow.400");
     }
   }
 }
@@ -57,9 +60,9 @@ a {
 .dark {
   .description {
     a {
-      text-decoration: underline solid theme("colors.yellow.300") 2px;
+      text-decoration-color: theme("colors.yellow.300");
       &.secondary {
-        text-decoration: underline solid theme("colors.blue.500") 2px;
+        text-decoration-color: theme("colors.blue.500");
       }
     }
   }
