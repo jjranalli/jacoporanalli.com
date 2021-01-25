@@ -5,13 +5,13 @@ export default function JJLogo(props) {
         d="M57 11C37.5 18.5 30.5 30.5 30.5 49L30.5 123.75"
         stroke="currentColor"
         strokeWidth="22"
-        className="group-hover:text-blue-500"
+        className="group-hover:text-blue-600"
       />
       <path
         d="M4 236.25C23.5 228.75 30.5 216.75 30.5 198.25L30.5 123.5"
         stroke="currentColor"
         strokeWidth="22"
-        className="group-hover:text-blue-500"
+        className="group-hover:text-blue-600"
       />
       <path
         d="M108 43.5C88.5 51 81.5 63 81.5 81.5L81.5 156.25"

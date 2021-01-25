@@ -1,5 +1,7 @@
 import "../styles/global/styles.scss"
 import { ThemeProvider } from "next-themes"
+import Layout from "../layouts/layout"
+import Container from "../layouts/container"
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -8,7 +10,11 @@ function MyApp({ Component, pageProps }) {
       storageKey="nightwind-mode"
       defaultTheme="system"
     >
-      <Component {...pageProps} />
+      <Layout>
+        <Container size="max-w-screen-md">
+          <Component {...pageProps} />
+        </Container>
+      </Layout>
     </ThemeProvider>
   )
 }

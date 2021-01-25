@@ -1,6 +1,4 @@
 import Head from "next/head"
-import { useTheme } from "next-themes"
-import { useEffect } from "react"
 
 import Navbar from "./navbar"
 import Footer from "./footer"
@@ -14,18 +12,10 @@ export default function Layout({ children }) {
   const ogImagePath = "/og_image.jpg"
   const twitterImgUrl = websiteUrl + "/twitter_card.jpg"
 
-  const { theme, setTheme } = useTheme()
-
-  useEffect(() => {
-    document.documentElement.classList.contains("dark")
-      ? setTheme("dark")
-      : setTheme("light")
-  }, [])
-
   return (
     <>
       <Head>
-        <title>{title}</title>
+        {/* <title>{title}</title> */}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"

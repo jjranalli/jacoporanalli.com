@@ -3,9 +3,9 @@ import Container from "./container"
 
 export default function Footer() {
   return (
-    <footer className="py-3.5">
+    <footer className="py-4">
       <Container>
-        <div className="flex space-x-8 justify-center">
+        <div className="flex space-x-10 justify-center">
           <a className="w-6" href="mailto:jj@jacoporanalli.com">
             <Mail />
           </a>

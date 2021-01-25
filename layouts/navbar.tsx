@@ -1,4 +1,5 @@
 import Link from "next/link"
+import ActiveLink from "./active-link"
 
 import Container from "./container"
 import Nightwind from "../components/nightwind"
@@ -8,7 +9,7 @@ export default function Navbar() {
   return (
     <header>
       <Container size="max-w-screen-md">
-        <nav className="py-6 px-2 items-center mx-auto flex justify-between">
+        <nav className="py-5 px-2 items-center mx-auto flex justify-between">
           <div className="flex flex-grow text-sm items-center">
             <Link href="/">
               <a className="group flex-shrink-0 text-base w-3.5">
@@ -16,12 +17,24 @@ export default function Navbar() {
               </a>
             </Link>
             <div
-              className="w-full mx-8 flex justify-between space-x-2"
-              style={{ maxWidth: "250px" }}
+              className="text-sm w-full mx-10 flex justify-between space-x-2"
+              style={{ maxWidth: "230px" }}
             >
-              <p>Builds</p>
-              <p>Writes</p>
-              <p>Composes</p>
+              <ActiveLink href="/projects">
+                <a>
+                  <p>Builds</p>
+                </a>
+              </ActiveLink>
+              <ActiveLink href="/blog">
+                <a>
+                  <p>Writes</p>
+                </a>
+              </ActiveLink>
+              <ActiveLink href="/music">
+                <a>
+                  <p>Composes</p>
+                </a>
+              </ActiveLink>
             </div>
           </div>
           <div>
