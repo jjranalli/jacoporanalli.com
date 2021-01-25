@@ -55,7 +55,7 @@ export default function Layout({ children }) {
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </Head>
-      <div className="relative min-h-screen flex flex-col justify-between">
+      <div className="layout">
         <div>
           <Navbar />
           {children}

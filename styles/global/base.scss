@@ -6,3 +6,8 @@ body {
   font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+
+.layout {
+  @apply relative min-h-screen flex flex-col justify-between;
+  min-height: -webkit-fill-available;
+}
