@@ -7,8 +7,8 @@ export default function Music() {
         <title>Jacopo's music</title>
       </Head>
 
-      <main className="pt-2">
-        <div className="py-6">
+      <section className="pt-2">
+        <div className="py-6 sm:pt-10">
           <h1 className="text-3xl pb-2">Music</h1>
           <h2 className="text-base font-normal">My lifelong passion.</h2>
         </div>
@@ -22,7 +22,7 @@ export default function Music() {
             I write/arrange songs with friends.
           </p>
         </div>
-      </main>
+      </section>
     </>
   )
 }

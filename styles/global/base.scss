@@ -11,9 +11,13 @@ body {
   @apply bg-white text-black;
 }
 
-#layout {
+.layout {
   @apply relative min-h-screen flex flex-col justify-between;
   @supports (-webkit-touch-callout: none) {
     min-height: -webkit-fill-available;
   }
+}
+
+.darken {
+  filter: brightness(0.5);
 }

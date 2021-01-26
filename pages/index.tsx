@@ -8,14 +8,14 @@ export default function Home() {
         <title>Hi, I'm Jacopo!</title>
       </Head>
 
-      <main className="pt-2">
-        <div className="py-6">
+      <section className="pt-2">
+        <div className="py-6 sm:pt-10">
           <h1 className="text-3xl pb-2">Jacopo Ranalli</h1>
           <h2 className="text-base font-normal">
             Full stack maker and engineer.
           </h2>
         </div>
-        <div className="description">
+        <main className="description">
           <p>
             <Link href="/projects">
               <a>Building</a>
@@ -68,8 +68,8 @@ export default function Home() {
             </Link>{" "}
             music.
           </p>
-        </div>
-      </main>
+        </main>
+      </section>
     </>
   )
 }

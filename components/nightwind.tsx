@@ -28,7 +28,7 @@ export default function Nightwind(props) {
         r="70"
         fill="currentColor"
         className={`${props.moonColor || "text-blue-600"} 
-          ${props.moonColorNight} ${props.transition || ""}`}
+          ${props.moonColorNight || ""} ${props.transition || ""}`}
       />
       <path
         fillRule="evenodd"

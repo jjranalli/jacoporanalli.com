@@ -56,7 +56,7 @@ export default function Layout({ children }) {
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </Head>
-      <div id="layout">
+      <div className="layout">
         <div>
           <Navbar />
           {children}
