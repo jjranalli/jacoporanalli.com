@@ -14,13 +14,20 @@ export default function Music() {
         </div>
         <div className="description">
           <p>
-            Graduated at music college, perfect pitch, I can play piano,
-            clarinet, guitar and everything else through my laptop.
+            Graduated at music college, I can play piano, clarinet, guitar and
+            everything else through my laptop.
           </p>
           <p>
             I hope one day to compose for movies, anime or videogames. Sometimes
             I write/arrange songs with friends.
           </p>
+          <a
+            href="https://soundcloud.com/jj_ranalli"
+            target="_blank"
+            rel="noopener"
+          >
+            You can listen them here
+          </a>
         </div>
       </section>
     </>

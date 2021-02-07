@@ -43,6 +43,13 @@ export default function Projects() {
             name="Nightwind"
             descr="Dark mode plugin for Tailwind CSS"
           />
+          <Card
+            href="https://dogeconverter.com"
+            srcImg="/card-doge.jpg"
+            srcImgHover="/cardhover-doge.jpg"
+            name="Dogeconverter"
+            descr="Convert Dogecoin to your favorite Tesla"
+          />
         </main>
         {/* <div className="description">
           <p>

@@ -55,6 +55,46 @@ a {
       text-decoration-color: theme("colors.yellow.400");
     }
   }
+
+  &.prose {
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    li {
+      @apply text-black;
+    }
+    a {
+      @apply text-black hover:text-blue-600;
+      transition-duration: 0ms !important;
+      &.secondary {
+        @apply hover:text-yellow-400;
+        text-decoration-color: theme("colors.yellow.400");
+      }
+    }
+    blockquote {
+      p {
+        @apply text-gray-700;
+        &:first-of-type::before,
+        &:last-of-type::after {
+          content: none;
+        }
+      }
+    }
+    ul > li::before {
+      @apply bg-black;
+    }
+    img {
+      @apply overflow-hidden rounded-lg shadow-xl mx-auto;
+    }
+    .twitter-tweet {
+      @apply mx-auto py-4;
+    }
+  }
 }
 
 .dark {

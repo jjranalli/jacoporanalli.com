@@ -32,13 +32,17 @@ module.exports = {
 
   variants: {
     nightwind: ["group-hover"],
-    textColor: ({ after }) => after(["group-hover"]),
-    opacity: ({ after }) => after(["group-hover"]),
+    extend: {
+      textColor: ["group-hover"],
+      opacity: ["group-hover"],
+      translate: ["group-hover"],
+    },
   },
 
   plugins: [
     require("nightwind"),
     require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/typography"),
     // plugin(),
   ],
 }

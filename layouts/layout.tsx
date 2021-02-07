@@ -1,15 +1,11 @@
 import Head from "next/head"
-import { useEffect } from "react"
-
 import Navbar from "./navbar"
 import Footer from "./footer"
-import nightwind from "nightwind/helper"
 
 export default function Layout({ children }) {
-  const title = "Next-template"
-  const subtitle = " - My new next project"
-  const description = "An interesting project."
-  const websiteUrl = ""
+  const title = "Jacoporanalli.com"
+  const description = "Jacopo Ranalli's personal corner of the internet."
+  const websiteUrl = "https://jacoporanalli.com"
   const ogImagePath = "/og_image.jpg"
   const twitterImgUrl = websiteUrl + "/twitter_card.jpg"
 
@@ -22,8 +18,6 @@ export default function Layout({ children }) {
           rel="stylesheet"
         ></link>
 
-        <script dangerouslySetInnerHTML={{ __html: nightwind.init() }} />
-
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content={description} />
 
@@ -32,7 +26,7 @@ export default function Layout({ children }) {
         <meta property="og:description" content={description} />
         <meta property="og:url" content={websiteUrl} />
 
-        <meta name="twitter:title" content={title + subtitle} />
+        <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={twitterImgUrl} />
         <meta name="twitter:card" content="summary_large_image" />

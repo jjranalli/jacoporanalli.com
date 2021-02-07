@@ -1,16 +1,9 @@
 import Head from "next/head"
 import Link from "next/link"
 import { Posts } from "../../components/blog"
+import { getAllPosts } from "../api/getPosts"
 
-export default function Blog() {
-  const posts = [
-    {
-      id: 1,
-      slug: "nightwind",
-      title: "Introducing Nightwind",
-      subtitle: "A Tailwind CSS plugin to enhance dark mode",
-    },
-  ]
+export default function Blog({ allPosts }) {
   return (
     <>
       <Head>
@@ -25,9 +18,30 @@ export default function Blog() {
           </h2>
         </div>
         <main className="description">
-          <Posts posts={posts} />
+          <ul>
+            {allPosts.map((post, key) => {
+              return (
+                <li key={key}>
+                  <p>
+                    <Link href={`/blog/${encodeURIComponent(post.slug)}`}>
+                      <a className="font-medium">{post.title}</a>
+                    </Link>
+                    : {post.subtitle}
+                  </p>
+                </li>
+              )
+            })}
+          </ul>
         </main>
       </section>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const allPosts = getAllPosts(["title", "subtitle", "slug"])
+
+  return {
+    props: { allPosts },
+  }
 }

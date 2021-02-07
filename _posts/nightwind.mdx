@@ -1,0 +1,203 @@
+---
+  htmlTitle: "Introducing Nightwind 🌘"
+  title: "Introducing Nightwind"
+  subtitle: "A Tailwind CSS plugin to enhance dark mode"
+  coverImage: "/blog/nightwind/cover.jpg"
+---
+
+Tailwind 2.0 introduced the long-awaited dark mode, which makes it easy to add a dark mode to your tailwind website by simply adding 'dark:' color classes.
+
+However, there are some downsides that can make the experience not ideal. Specifically:
+
+- Each 'dark:' variant needs to be specified for every color you want to be switched (supposedly all of them, which can be quite a lot);
+- You need to come up with each 'dark:' color from scratch (which can take up a considerable effort);
+- The number of color classes in your markup may sharply increase, affecting readability while making it harder to achieve & maintain consistency in your design;
+- You still need to take care of the usual setup in order to correctly implement dark mode (no light flicker, persisting on update).
+
+Nightwind addresses all of these, adding some perks to the original Tailwind implementation. Its aim is to make it **easy to set up and fully manage dark mode**.
+
+At the same time it gives you many customisation options, while keeping everything tidy in your tailwind.config.js.
+
+With just a couple of lines of code you end up with a fully functioning dark theme, often without having to write or think of a single 'dark:' class.
+
+**In other words, it makes dark mode fun.**
+
+[![jjranalli/nightwind - GitHub](https://gh-card.dev/repos/jjranalli/nightwind.svg)](https://github.com/jjranalli/nightwind)
+
+You can see Nightwind in action at [nightwindcss.com](https://nightwindcss.com)
+
+---
+
+The Tailwind CSS debate on writing classes in the markup is still quite lively today. And one of the main critics surrounding dark mode has been to further exacerbating the problem.
+
+<blockquote class="twitter-tweet">
+  <p lang="en" dir="ltr">
+    My biggest complaint is how dark mode and pseudo states are handled, which
+    is sort of the epitome of its usability issues. I have these absolutely
+    massive classes with sets of styles like &quot;dark:hover:bg-gray-900
+    hover:bg-gray-200&quot; that I just can&#39;t keep track of.
+  </p>
+  &mdash; Brandon Dail (@aweary) <a href="https://twitter.com/aweary/status/1345794974370193409?ref_src=twsrc%5Etfw">January 3, 2021</a>
+</blockquote>
+
+While I'm not here to fuel the fire, I also share the feeling that 'dark:' classes can often end up unnecessarily polluting the markup. Also, dark mode looks less appealing once you realise you need to write a 'dark:' class for each and every one of the color classes you've used.
+
+And if you care about consistency (you probably should), just looking at an html made like this can feel oppressing. Which is not good.
+
+So, with that in mind, let me introduce the feature that sparked the birth of Nightwind.
+
+---
+
+## Automatic dark mode
+
+One of the things I love most about Tailwind is its amazingly curated, **weighted** color palette. So one day I lazily thought:
+
+> What if I reversed the color weights when switching from light to dark mode?
+
+<img width="100%" style="width:100%" src="https://media.giphy.com/media/UwWYKsK0LdYY2AQt3D/giphy.gif">
+
+Here all -50 colors are getting switched with -900, -100 with -800, -200 with -700, etc.
+
+Watching a coherent dark mode appear without doing absolutely anything (no 'dark:' classes, no setup) is quite fascinating to me. Especially automatic dark gradients ✨
+
+> How does it work: Nightwind relies on a fixed 'nightwind' class to manage transitions, and a toggled 'dark' class applied on a top level element in the DOM, typically the root element.
+
+But while the automatic dark theme Nightwind generates can indeed work out-of-the-box in some cases, it's not that easy to make a truly effective dark mode. Adam explained this matter in detail in the following thread:
+
+<blockquote class="twitter-tweet">
+  <p lang="en" dir="ltr">
+    This is a great example of why you need more control when implementing dark
+    mode than just reversing the color scheme or overriding basic variables like
+    &quot;--color-primary&quot; or similar.
+    <br />
+    Short thread pointing out some of the neat design decisions here 👉{" "}
+    <a href="https://t.co/8ndlHfT37r">https://t.co/8ndlHfT37r</a>
+  </p>
+  &mdash; Adam Wathan (@adamwathan) <a href="https://twitter.com/adamwathan/status/1350454882059358208?ref_src=twsrc%5Etfw">January 16, 2021</a>
+</blockquote>
+
+Personally, I like to use the automatic dark mode to do the guesswork and heavy lifting for me. I can then focus my whole attention on fine-tuning colors and making design choices.
+
+Not having to start from scratch makes it remarkably fast (and fun imho).
+
+In other words the aim of this feature is not to be perfect, but rather to give a **good starting point for your customization**.
+
+---
+
+## Built around customization
+
+Each color hue appears inherently different to the eye due to their _perceived brightness_ ([Refactoring UI](https://refactoringui.com/book/) is a great read on this matter), so color inversion behaves differently depending if you're doing it on a blue (low perceived brightness) or a yellow (high perceived brightness).
+
+Moreover, as stated by Adam in the thread above, there are some occasion where simply inverting a color isn't desirable. Depending on the purpose of a UI element, you may want to use a different shade - or even a different color altogether.
+
+And then, even subjectivity plays a huge role. What may look good to me, could look bad to you or may not fit your use case.
+
+Which is why **Nightwind is designed to be fully customisable**, without making it harder to use.
+
+> A full list of the available customisation options can be found on the [Github repository](https://github.com/jjranalli/nightwind).
+
+Here are the main aspects that makes it easy to craft your own dark theme.
+
+### Custom colors
+
+If you add your custom colors in tailwind.config.js using number notation, Nightwind will treat them the same way as Tailwind's colors when switching into dark mode. No additional setup required.
+
+```jsx
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: "#caf0f8", // becomes primary-900 in dark mode
+          300: "#90e0ef", // becomes primary-600 in dark mode
+          600: "#0077b6", // becomes primary-300 in dark mode
+          900: "#03045e", // becomes primary-50 in dark mode
+        },
+      },
+    },
+  },
+  // ...
+}
+```
+
+### Color mappings
+
+Color mappings allow you to fine-tune your dark theme, change colors in batch and control how Nightwind behaves in dark mode.
+
+You can map them using individual colors (in hex '#fff' or Tailwind-inspired color codes 'red.100'), or color classes (such as 'blue' or 'primary')
+
+> How would it look if all “rose” became “blue” in dark mode?
+
+That's 1 line in Nightwind:
+
+```jsx
+// tailwind.config.js
+module.exports = {
+  theme: {
+    nightwind: {
+      colors: {
+        rose: "blue",
+      },
+    },
+  },
+}
+```
+
+Or consider the following snippet, here I'm using a _hybrid mapping_ to not only turn all 'rose' colors into 'blue', but also to turn rose-200 colors into yellow-300.
+
+```jsx
+// tailwind.config.js
+module.exports = {
+  theme: {
+    nightwind: {
+      colors: {
+        white: "gray.900",
+        black: "gray.50",
+        yellow: "primary",
+        rose: {
+          default: "blue",
+          200: "yellow.300",
+        },
+      },
+    },
+  },
+  // ...
+}
+```
+
+And this is what happens to your rose palette (you can also check it out on [nightwindcss.com](http://nightwindcss.com))
+
+<img width="100%" style="width:100%" src="https://media.giphy.com/media/lHvG1i7h3Xz8Pxeccj/source.gif">
+
+### Overrides and the 'nightwind-prevent' class
+
+Sometimes though, you may still wish to override some settings for a specific element.
+
+You can easily do it in Nightwind using the default 'dark:' variant directly in your markup. Just as you would normally do in Tailwind.
+
+And if you want an element to look exactly the same in both light and dark modes, just add a 'nightwind-prevent' class to it.
+
+## Final considerations
+
+### A cleaner HTML is a better HTML
+
+One of the upsides of setting up dark mode this way is to write much fewer “dark:” classes, which instead go in tailwind.config.js.
+
+**This makes it easy to experiment or implement changes, while keeping your dark mode consistent.**
+
+### Helper functions
+
+To correctly implement dark mode, you may want to avoid the dreaded flicker and make the chosen mode persist on update.
+
+There's usually some additional setup to be done, which is why Nightwind comes together with some helper functions that address these common problems.
+
+That way you can get up and running in a matter of seconds by adding a script, or choose to use your own implementation.
+
+### Wrapping up
+
+Nightwind is still getting frequently updated, so if you're interested in the space make sure to [keep an eye on the repo](https://github.com/jjranalli/nightwind) to know what's going on.
+
+And if you decide to try it out, **I'd love to know what you think!** So feel free to reach out to me on [Twitter](https://twitter.com/jj_ranalli) to let me know, or if you have any question.
+
+Happy dark mode!
