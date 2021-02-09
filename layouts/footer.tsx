@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="py-4">
       <Container>
         <div className="flex space-x-10 justify-center">
-          <a className="w-6" href="mailto:jj@jacoporanalli.com">
+          <a className="w-6" href="mailto:jacopo.ranalli@gmail.com">
             <Mail />
           </a>
           <a
