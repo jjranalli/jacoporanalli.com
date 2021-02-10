@@ -6,7 +6,7 @@ export default function ActiveLink({ href, children }) {
   const router = useRouter()
 
   let className = children.props.className || ""
-  if (router.pathname === href) {
+  if (router.pathname.includes(href)) {
     className = `${className} text-blue-600`
   }
 
