@@ -19,7 +19,7 @@ export default function Article(props) {
         <title>{props.htmlTitle || props.title}</title>
       </Head>
 
-      <section className="pt-2 pb-6">
+      <section className="pt-2 pb-10">
         <Back />
         <div className="pt-6">
           <h1 className="text-3xl pb-2">{props.title}</h1>
@@ -36,7 +36,9 @@ export default function Article(props) {
           </div>
         ) : null}
 
-        <main className="description prose lg:prose-lg">{props.children}</main>
+        <article className="description prose lg:prose-lg">
+          {props.children}
+        </article>
       </section>
     </>
   )

@@ -8,6 +8,7 @@ export default function Doc({ post }) {
     <Article
       htmlTitle={post.htmlTitle}
       title={post.title}
+      slug={post.slug}
       subtitle={post.subtitle}
       coverImage={post.coverImage}
     >
