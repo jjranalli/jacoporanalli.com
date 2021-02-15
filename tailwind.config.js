@@ -1,5 +1,5 @@
-const plugin = require("tailwindcss/plugin")
-const colors = require("tailwindcss/colors")
+// const plugin = require("tailwindcss/plugin")
+// const colors = require("tailwindcss/colors")
 
 module.exports = {
   darkMode: "class",
@@ -17,6 +17,7 @@ module.exports = {
 
   theme: {
     nightwind: {
+      typography: true,
       colors: {
         white: "#141618",
         black: "gray.50",
@@ -25,8 +26,16 @@ module.exports = {
       },
     },
     extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            blockquote: {
+              borderLeftColor: theme("colors.blue.600"),
+            },
+          },
+        },
+      }),
       screens: {},
-      colors: {},
     },
   },
 
@@ -40,9 +49,8 @@ module.exports = {
   },
 
   plugins: [
-    require("nightwind"),
-    require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/typography"),
-    // plugin(),
+    require("@tailwindcss/aspect-ratio"),
+    require("nightwind"),
   ],
 }
