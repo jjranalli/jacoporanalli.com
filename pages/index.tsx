@@ -68,6 +68,18 @@ export default function Home() {
             </Link>{" "}
             music.
           </p>
+          <p className="pt-6">
+            Always open to work with exciting startups/projects.{" "}
+            <a
+              href="https://twitter.com/jj_ranalli"
+              rel="noopener"
+              target="_blank"
+              className="secondary"
+            >
+              Write me
+            </a>{" "}
+            if you want to do something cool together.
+          </p>
         </main>
       </section>
     </>
