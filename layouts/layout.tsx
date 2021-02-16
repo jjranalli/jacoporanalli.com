@@ -4,7 +4,7 @@ import Footer from "./footer"
 
 export default function Layout({ children }) {
   const title = "Jacoporanalli.com"
-  const description = "Jacopo Ranalli's personal corner of the internet."
+  const description = "Jacopo's personal corner of the internet."
   const websiteUrl = "https://jacoporanalli.com"
   const ogImagePath = "/og_image.jpg"
   const twitterImgUrl = websiteUrl + "/twitter_card.jpg"
@@ -21,10 +21,14 @@ export default function Layout({ children }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content={description} />
 
-        <meta property="og:title" content={title} />
-        <meta property="og:image" content={ogImagePath} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={websiteUrl} />
+        <meta key="og:title" property="og:title" content={title} />
+        <meta key="og:image" property="og:image" content={ogImagePath} />
+        <meta
+          key="og:description"
+          property="og:description"
+          content={description}
+        />
+        <meta key="og:url" property="og:url" content={websiteUrl} />
 
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />

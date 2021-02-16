@@ -17,6 +17,36 @@ export default function Article(props) {
     <>
       <Head>
         <title>{props.htmlTitle || props.title}</title>
+        <meta name="description" content={props.subtitle} />
+        <meta
+          key="og:title"
+          property="og:title"
+          content={(props.htmlTitle || props.title) + " | Jacopo's blog"}
+        />
+        <meta
+          key="og:description"
+          property="og:description"
+          content={props.subtitle}
+        />
+        <meta
+          key="og:url"
+          property="og:url"
+          content={"https://jacoporanalli.com/blog/" + props.slug}
+        />
+        <meta
+          key="og:image"
+          property="og:image"
+          content={"https://jacoporanalli.com" + props.coverImage}
+        />
+        <meta
+          name="twitter:title"
+          content={(props.htmlTitle || props.title) + " | Jacopo's blog"}
+        />
+        <meta name="twitter:description" content={props.subtitle} />
+        <meta
+          name="twitter:image"
+          content={"https://jacoporanalli.com" + props.coverImage}
+        />
       </Head>
 
       <section className="pt-2 pb-10">
