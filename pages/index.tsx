@@ -69,7 +69,6 @@ export default function Home() {
             music.
           </p>
           <p className="pt-6">
-            Always open to work with exciting startups/projects.{" "}
             <a
               href="https://twitter.com/jj_ranalli"
               rel="noopener"
