@@ -54,7 +54,11 @@ One of the things I love most about Tailwind is its amazingly curated, **weighte
 
 > What if I reversed the color weights when switching from light to dark mode?
 
-<img width="100%" style="width:100%" src="https://media.giphy.com/media/UwWYKsK0LdYY2AQt3D/giphy.gif">
+<img
+  width="100%"
+  style="width:100%"
+  src="https://media.giphy.com/media/UwWYKsK0LdYY2AQt3D/giphy.gif"
+/>
 
 Here all -50 colors are getting switched with -900, -100 with -800, -200 with -700, etc.
 
@@ -102,7 +106,7 @@ Here are the main aspects that makes it easy to craft your own dark theme.
 
 If you add your custom colors in tailwind.config.js using number notation, Nightwind will treat them the same way as Tailwind's colors when switching into dark mode. No additional setup required.
 
-```jsx
+```js
 // tailwind.config.js
 module.exports = {
   theme: {
@@ -131,7 +135,7 @@ You can map them using individual colors (in hex '#fff' or Tailwind-inspired col
 
 That's 1 line in Nightwind:
 
-```jsx
+```js
 // tailwind.config.js
 module.exports = {
   theme: {
@@ -146,7 +150,7 @@ module.exports = {
 
 Or consider the following snippet, here I'm using a _hybrid mapping_ to not only turn all 'rose' colors into 'blue', but also to turn rose-200 colors into yellow-300.
 
-```jsx
+```js
 // tailwind.config.js
 module.exports = {
   theme: {
@@ -168,7 +172,11 @@ module.exports = {
 
 And this is what happens to your rose palette (you can also check it out on [nightwindcss.com](http://nightwindcss.com))
 
-<img width="100%" style="width:100%" src="https://media.giphy.com/media/lHvG1i7h3Xz8Pxeccj/source.gif">
+<img
+  width="100%"
+  style="width:100%"
+  src="https://media.giphy.com/media/lHvG1i7h3Xz8Pxeccj/source.gif"
+/>
 
 ### Overrides and the 'nightwind-prevent' class
 

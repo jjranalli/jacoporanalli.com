@@ -12,7 +12,7 @@ export default function Doc({ post }) {
       subtitle={post.subtitle}
       coverImage={post.coverImage}
     >
-      <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+      <main dangerouslySetInnerHTML={{ __html: post.content }}></main>
     </Article>
   )
 }
