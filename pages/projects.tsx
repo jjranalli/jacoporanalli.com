@@ -8,6 +8,7 @@ import Button from "../components/button"
 
 export default function Projects() {
   const [olderVisibility, setOlderVisibility] = useState(false)
+
   return (
     <>
       <Head>
@@ -56,8 +57,8 @@ export default function Projects() {
           />
         </main>
         <section className={olderVisibility ? "" : "hidden"}>
-          <div className="sm:pt-10">
-            <h1 className="text-3xl">Older Projects</h1>
+          <div className="pt-10">
+            <h1 className="text-2xl sm:text-3xl">Older Projects</h1>
           </div>
 
           <div>
@@ -70,11 +71,15 @@ export default function Projects() {
             />
           </div>
         </section>
-        <div className="py-4 flex justify-center flex-wrap ">
+        <div
+          className={`py-4 flex justify-center flex-wrap ${
+            olderVisibility && "hidden"
+          }`}
+        >
           <Button
             primary
             onClick={() => setOlderVisibility(true)}
-            className={`mx-6 my-3 ${olderVisibility && "hidden"}`}
+            className="mx-6 my-3"
             label="See older projects"
           />
           {/* <Button
