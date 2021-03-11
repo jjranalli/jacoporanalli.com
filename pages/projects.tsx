@@ -1,9 +1,13 @@
 import Head from "next/head"
 import Link from "next/link"
 
+import { useState } from "react"
+
 import Card from "../components/card"
+import Button from "../components/button"
 
 export default function Projects() {
+  const [olderVisibility, setOlderVisibility] = useState(false)
   return (
     <>
       <Head>
@@ -51,6 +55,35 @@ export default function Projects() {
             descr="Convert Dogecoin to your favorite Tesla"
           />
         </main>
+        <section className={olderVisibility ? "" : "hidden"}>
+          <div className="sm:pt-10">
+            <h1 className="text-3xl">Older Projects</h1>
+          </div>
+
+          <div>
+            <Card
+              href="https://covidguard.io/"
+              srcImg="/card-covid.jpg"
+              srcImgHover="/cardhover-covid.jpg"
+              name="Covid Guard"
+              descr="The global COVID-19 screening platform"
+            />
+          </div>
+        </section>
+        <div className="py-4 flex justify-center flex-wrap ">
+          <Button
+            primary
+            onClick={() => setOlderVisibility(true)}
+            className={`mx-6 my-3 ${olderVisibility && "hidden"}`}
+            label="See older projects"
+          />
+          {/* <Button
+            secondary
+            onClick={() => setOlderVisibility(true)}
+            className={`mx-6 my-3 ${olderVisibility && "hidden"}`}
+            label="See older projects"
+          /> */}
+        </div>
         {/* <div className="description">
           <p>
             You can also explore my{" "}
