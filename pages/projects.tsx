@@ -35,6 +35,13 @@ export default function Projects() {
             descr="3D printed biomedical devices"
           />
           <Card
+            href="https://series.slice.so/playground"
+            srcImg="/card-playground.jpg"
+            srcImgHover="/cardhover-playground.jpg"
+            name="Notion Playground"
+            descr="Play with Notion API"
+          />
+          <Card
             href="https://iconos.design"
             srcImg="/card-iconos.png"
             srcImgHover="/cardhover-iconos.png"

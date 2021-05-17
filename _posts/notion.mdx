@@ -1,0 +1,241 @@
+---
+  title: "Notion Playgrounds"
+  subtitle: "How I built this weird thing using Notion API and some Nextjs magic"
+  coverImage: "/blog/notion.jpg"
+---
+
+Now that the [Notion API](https://developers.notion.com) is in beta, nothing could stop me anymore from trying it out. This quickly ended up in a weird experiment called [Notion Playgrounds](https://series.slice.so/playground).
+
+Here's how I built it, using [Nextjs](https://nextjs.org), [TailwindCSS](https://tailwindcss.com) and [Nightwind](https://github.com/jjranalli/nightwind) to automatically generate the dark mode.
+
+## Interacting with Notion API
+
+First of all, I created an api route to handle my Notion GET requests. In this case I was interested in retrieving the contents of a Notion page, so I needed the [Retrieve block children endpoint](https://developers.notion.com/reference/get-block-children).
+
+I knew I wanted to build more than one page, so I built a [dynamic API route](https://nextjs.org/docs/api-routes/dynamic-api-routes) that accepts a **pageId** as the query parameter, and returns me the corresponding object from the Notion API.
+
+```js
+// api/notion/[pageId].ts
+export default async function handler(req, res) {
+  const { pageId } = req.query
+  const endpointBlocks = `https://api.notion.com/v1/blocks/${pageId}/children`
+
+  const fetcher = (url, options?) =>
+    fetch(url, options).then((res) => res.json())
+
+  const data = {
+    headers: {
+      Authorization: `Bearer ${process.env.NOTION_KEY}`,
+      "Content-Type": "application/json",
+      "Notion-Version": "2021-05-13",
+    },
+  }
+
+  const blocks = await fetcher(endpointBlocks, data)
+  res.status(200).json({ blocks })
+}
+```
+
+## Rendering the page & the swr magic ✨
+
+There were 3 things I wanted:
+
+1. **Generate the pages statically**, to make everything lightning-fast and SEO friendly
+2. **Have dynamic routes**, so I could have all pages under the paths _/playground/1_, _/playground/2_, etc.
+3. **Fetching data from Notion in real-time**, with a [stale-while-revalidate pattern](https://swr.vercel.app/).
+
+### Dynamic routes & Static Generation
+
+[Static generation in Nextjs](https://nextjs.org/docs/basic-features/data-fetching) happens through the _getStaticPaths_ and _getStaticProps_ functions.
+
+GetStaticPaths is used to get the actual paths of the page, while getStaticProps returns the props to each page – in this case the **slug** and the **pageId** props.
+
+```js
+// pages/playground/[slug].tsx
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      {
+        params: {
+          slug: "1",
+        },
+      },
+      {
+        params: {
+          slug: "2",
+        },
+      },
+      {
+        params: {
+          slug: "3",
+        },
+      },
+    ],
+    fallback: false,
+  }
+}
+
+export async function getStaticProps(context) {
+  const slug = context.params.slug
+  const pageIdArray = [
+    "38fc182c459340b294fca3c99b88faae",
+    "9e569a521efc4f0fa2087de12fca5e81",
+    "59a5889031314f73a2c1bd268a486dff",
+  ]
+  const pageId = pageIdArray[slug - 1]
+  return {
+    props: {
+      slug,
+      pageId,
+    },
+  }
+}
+```
+
+### Rendering the data on page
+
+Getting the data to display on website is trivial when using Nextjs and the (amazing) [SWR hook](https://swr.vercel.app).
+
+I simply have to make an API call to the API route I built in the first step, using SWR and a fetcher function. This will return me the data to display on page, while caching and revalidating automatically.
+
+```js
+export default function Play({ slug, pageId }) {
+  const fetcher = (url, options?) =>
+    fetch(url, options).then((res) => res.json())
+
+  const { data, error } = useSWR(`/api/notion/${pageId}`, fetcher)
+
+  return (
+    // Return page using data returned from the api
+  )
+}
+```
+
+At this point I just had to render what Notion was returning from my request.
+
+In this case, that would be an array of [block objects](https://developers.notion.com/reference/block), each containing an array of [Rich text objects](https://developers.notion.com/reference/rich-text) containing the styling properties.
+
+> Note: Some blocks appear to be unsupported at this time, and others have children blocks that would've needed to be retrieved recursively. I didn't build this feature yet, so I made sure such block returned either a line element or _null_.
+
+```js
+// ...
+<div className="prose">
+  {!error && data ? (
+    data.blocks.results.map((line, key) => {
+      if (line.paragraph) {
+        return (
+          <p key={key}>
+            {line.paragraph.text.map((t, k) => {
+              return <NotionSpan key={k} t={t} />
+            })}
+          </p>
+        )
+      } else if (line.heading_1) {
+        return (
+          <h1 key={key}>
+            {line.heading_1.text.map((t, k) => {
+              return <NotionSpan key={k} t={t} />
+            })}
+          </h1>
+        )
+      }
+      // ... All elements that can be contained in the block objects
+      else if (
+        line.type === "unsupported" &&
+        line.object === "block" &&
+        !line.has_children
+      ) {
+        return <hr key={key} />
+      } else {
+        return null
+      }
+    })
+  ) : (
+    <p className="text-gray-500 text-center">Ready in 3, 2, 1...</p>
+  )}
+</div>
+```
+
+To handle text styling I wanted to leverage the amazing TailwindCSS palette while automatically build a dark mode with Nightwind.
+
+So I made a **\<NotionSpan>** component which returns the text content of the Rich text object, wrapped in a **\<span>** element with styling applied depending on the properties of the Rich text object.
+
+I don't have to think about styling the dark mode because [Nightwind does it automatically for me](https://github.com/jjranalli/nightwind).
+
+```js
+import { FC } from "react"
+
+export interface NotionSpanProps {
+  t: any;
+}
+
+const colors = {
+  text: {
+    gray: "text-gray-600",
+    brown: "text-amber-700",
+    orange: "text-orange-600",
+    yellow: "text-yellow-600",
+    green: "text-green-600",
+    blue: "text-blue-600",
+    purple: "text-purple-500",
+    pink: "text-pink-600",
+    red: "text-red-500",
+  },
+  bg: {
+    gray: "bg-gray-200",
+    brown: "bg-amber-200",
+    orange: "bg-orange-200",
+    yellow: "bg-yellow-200",
+    green: "bg-green-200",
+    blue: "bg-blue-200",
+    purple: "bg-purple-200",
+    pink: "bg-pink-200",
+    red: "bg-red-200",
+  },
+}
+
+const NotionSpan: FC<NotionSpanProps> = ({ t }) => {
+  return (
+    <span
+      className={`
+      ${t.annotations.bold ? "font-bold " : ""}
+      ${
+        t.annotations.code
+          ? "font-medium overflow-hidden shadow-md rounded-sm py-2.5 px-5 bg-gray-100 text-indigo-600"
+          : ""
+      }
+      ${
+        t.annotations.color !== "default"
+          ? t.annotations.color.includes("background")
+            ? `${colors.bg[t.annotations.color.split("_")[0]]} text-gray-900 `
+            : colors.text[t.annotations.color]
+          : ""
+      }
+      ${t.annotations.italic ? "italic " : ""}
+      ${t.annotations.strikethrough ? "line-through " : ""}
+      ${t.annotations.underline ? "underline " : ""}`}
+    >
+      {t.text.link ? (
+        <a href={t.text.link.url} target="_blank" rel="noopener">
+          {t.text.content}
+        </a>
+      ) : (
+        `${t.text.content}`
+      )}
+    </span>
+  )
+}
+
+export default NotionSpan
+```
+
+### Wrapping up
+
+And that's it! Notion API makes it really easy to get the data of a Notion page (and databases seem to be even more powerful, can't wait to try that too!), while Nextjs + swr spectacularly handle all the complex parts giving you the best possible experience.
+
+---
+
+If you liked this post or have any question, feel free to let me know on [Twitter!](https://twitter.com/jj_ranalli)
+
+And if you like this whole experiment, consider leaving a note on the [Notion Playgrounds](https://series.slice.so/playground) and upvoting it on [Product Hunt](https://www.producthunt.com/posts/notion-playground-slice-series). Thanks! 🍩
