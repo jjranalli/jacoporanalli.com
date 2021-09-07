@@ -17,16 +17,23 @@ export default function Projects() {
 
       <section className="pt-2">
         <div className="py-6 sm:pt-10">
-          <h1 className="text-3xl pb-2">Projects</h1>
+          <h1 className="pb-2 text-3xl">Projects</h1>
           <h2 className="text-base font-normal">Driven by pure curiosity.</h2>
         </div>
-        <div className="description pb-1">
+        <div className="pb-1 description">
           <p>
             Materials engineer, startup founder, generalist. I love learning new
             stuff and experimenting. Expert at throwing myself into the unknown.
           </p>
         </div>
         <main>
+          <Card
+            href="https://slice.so"
+            srcImg="/card-slice.jpg"
+            srcImgHover="/cardhover-slice.jpg"
+            name="Slice 🍰"
+            descr="Decentralized slicing platform"
+          />
           <Card
             href="https://exosarmor.com"
             srcImg="/card-exos.jpg"
@@ -35,11 +42,11 @@ export default function Projects() {
             descr="3D printed biomedical devices"
           />
           <Card
-            href="https://series.slice.so/playground"
-            srcImg="/card-playground.jpg"
-            srcImgHover="/cardhover-playground.jpg"
-            name="Notion Playground"
-            descr="Play with Notion API"
+            href="https://nightwindcss.com"
+            srcImg="/card-nightwind.png"
+            srcImgHover="/cardhover-nightwind.png"
+            name="Nightwind"
+            descr="Dark mode plugin for Tailwind CSS"
           />
           <Card
             href="https://iconos.design"
@@ -49,11 +56,11 @@ export default function Projects() {
             descr="Marketplace of custom icons for iOS"
           />
           <Card
-            href="https://nightwindcss.com"
-            srcImg="/card-nightwind.png"
-            srcImgHover="/cardhover-nightwind.png"
-            name="Nightwind"
-            descr="Dark mode plugin for Tailwind CSS"
+            href="https://series.slice.so/playground"
+            srcImg="/card-playground.jpg"
+            srcImgHover="/cardhover-playground.jpg"
+            name="Notion Playground"
+            descr="Play with Notion API"
           />
           <Card
             href="https://dogeconverter.com"
